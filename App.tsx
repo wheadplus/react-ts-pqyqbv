@@ -7,6 +7,8 @@ interface Props {
 }
 interface State {
   n: number;
+  firstName: string;
+  lastName: string;
 }
 
 class App extends React.Component<Props, State> {
@@ -26,7 +28,20 @@ class App extends React.Component<Props, State> {
     super(props);
     this.state = {
       n: 11,
+      firstName: 'jimmy',
+      lastName: 'coco',
     };
+  }
+  // 计算属性
+  get name() {
+    return this.state.firstName + ' ' + this.state.lastName;
+  }
+  set name(newName) {
+    const [firstName, lastName] = newName.split(' ');
+    this.setState({
+      firstName,
+      lastName,
+    });
   }
   // x() {
   //   console.log(this);
@@ -41,6 +56,7 @@ class App extends React.Component<Props, State> {
         {this.props.message}
         <div>{this.state.n}</div>
         <button onClick={this.x}>click</button>
+        <div>{this.name}</div>
       </div>
     );
   }
